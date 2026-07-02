@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhay Singh — Software Developer</title>
+<meta name="description" content="Abhay Singh — Software Developer specializing in React, Node.js, Angular and accessible web applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F7F9FC;
+    --ink:#0F172A;
+    --ink-soft:#475569;
+    --muted:#94A3B8;
+    --line:#E5E9F0;
+    --blue:#2952E3;
+    --blue-dark:#1D3FBF;
+    --blue-tint:#EEF2FE;
+    --gold:#B98A2E;
+    --display:'Manrope', sans-serif;
+    --body:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.01ms!important; transition-duration:.01ms!important;} }
+  body{font-family:var(--body); background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--blue-tint); color:var(--blue-dark);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:3px; border-radius:2px;}
+
+  /* NAV */
+  header.nav{position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1040px; margin:0 auto; padding:18px 32px; display:flex; align-items:center; justify-content:space-between;}
+  .nav-mark{font-family:var(--display); font-weight:800; font-size:16px; letter-spacing:-0.01em; color:var(--ink);}
+  .nav-links{display:flex; gap:30px; list-style:none;}
+  .nav-links a{font-size:14px; font-weight:500; color:var(--ink-soft); transition:color .2s ease;}
+  .nav-links a:hover{color:var(--blue);}
+  .nav-cta{font-size:14px; font-weight:600; color:#fff; background:var(--blue); padding:9px 18px; border-radius:6px; transition:background .2s ease;}
+  .nav-cta:hover{background:var(--blue-dark);}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* HERO */
+  .hero{
+    padding:76px 0 0; position:relative; overflow:hidden;
+    background:linear-gradient(180deg, #F4F7FF 0%, #FFFFFF 62%);
+  }
+  .hero::before{
+    content:""; position:absolute; top:-140px; right:-120px; width:420px; height:420px;
+    background:radial-gradient(circle, rgba(41,82,227,0.14), transparent 70%);
+    border-radius:50%; pointer-events:none;
+  }
+  .hero-card{
+    position:relative; z-index:1;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.8);
+    box-shadow:0 8px 32px rgba(15,23,42,0.06);
+    border-radius:18px; padding:44px 40px; margin-bottom:-56px;
+  }
+  .hero-grid{display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center;}
+  .avatar{
+    width:100px; height:100px; border-radius:50%;
+    background:linear-gradient(145deg, var(--blue), #6E8CFF);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-weight:800; font-size:34px; color:#fff;
+    flex-shrink:0; box-shadow:0 6px 20px rgba(41,82,227,0.28);
+  }
+  .eyebrow{font-size:12.5px; font-weight:700; color:var(--blue); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:7px;}
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:#22C55E;}
+  h1.name{font-family:var(--display); font-weight:800; font-size:clamp(28px,4.2vw,38px); letter-spacing:-0.02em; color:var(--ink);}
+  .hero-niche{font-family:var(--display); font-weight:700; font-size:16px; color:var(--blue); margin-top:6px;}
+  .hero-role{font-size:15px; color:var(--ink-soft); margin-top:10px; max-width:600px;}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:16px; margin-top:16px; font-size:13px; color:var(--ink-soft);}
+  .hero-meta span{display:flex; align-items:center; gap:6px;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:24px;}
+  .btn{font-size:14px; font-weight:600; padding:11px 20px; border-radius:6px; transition:all .2s ease; border:1px solid var(--line);}
+  .btn-primary{background:var(--blue); color:#fff; border-color:var(--blue);}
+  .btn-primary:hover{background:var(--blue-dark); border-color:var(--blue-dark);}
+  .btn-outline{background:#fff; color:var(--ink); }
+  .btn-outline:hover{border-color:var(--blue); color:var(--blue);}
+  .hero-spacer{height:96px;}
+  @media (max-width:600px){ .hero-grid{grid-template-columns:1fr; text-align:left;} .hero-card{padding:30px 24px;} }
+
+  /* SECTION */
+  section{padding:64px 0;}
+  section.alt{background:var(--bg-soft);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:8px;}
+  .section-label{font-size:12.5px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.06em;}
+  h2{font-family:var(--display); font-weight:700; font-size:24px; color:var(--ink); margin-top:4px;}
+  .section-sub{font-size:14px; color:var(--muted);}
+
+  /* SUMMARY */
+  .summary p{font-size:15.5px; color:var(--ink-soft); max-width:760px;}
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px;}
+  .stat-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:20px;}
+  .stat-card .num{font-family:var(--display); font-weight:800; font-size:26px; color:var(--blue);}
+  .stat-card .label{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+  @media (max-width:600px){ .stat-row{grid-template-columns:1fr;} }
+
+  /* EXPERIENCE */
+  .job-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:26px 28px; margin-bottom:16px;}
+  .job-card:hover{border-color:#C7D2E6;}
+  .job-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+  .job-title{font-family:var(--display); font-weight:700; font-size:17px; color:var(--ink);}
+  .job-company{font-size:14px; color:var(--blue); font-weight:600; margin-top:2px;}
+  .job-dates{font-size:12.5px; color:var(--muted); font-weight:500; white-space:nowrap; padding-top:2px;}
+  .job-card ul{list-style:none; margin-top:14px;}
+  .job-card li{position:relative; padding-left:18px; margin-bottom:7px; font-size:14.5px; color:var(--ink-soft);}
+  .job-card li::before{content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--blue);}
+
+  /* PROJECTS */
+  .project-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  .project-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:26px 28px;}
+  .project-card.featured{border-color:var(--blue); box-shadow:0 1px 0 var(--blue);}
+  .project-badge{display:inline-block; font-size:11px; font-weight:700; color:var(--blue); background:var(--blue-tint); padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:10px;}
+  .project-title{font-family:var(--display); font-weight:700; font-size:17.5px; color:var(--ink); margin-bottom:10px;}
+  .project-card ul{list-style:none;}
+  .project-card li{position:relative; padding-left:18px; margin-bottom:6px; font-size:14.5px; color:var(--ink-soft);}
+  .project-card li::before{content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--gold);}
+  .stack{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .chip{font-size:12px; font-weight:500; background:var(--bg-soft); border:1px solid var(--line); padding:5px 11px; border-radius:6px; color:var(--ink-soft);}
+
+  /* SKILLS */
+  .skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .skill-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px;}
+  .skill-card h3{font-family:var(--display); font-weight:700; font-size:14px; color:var(--ink); margin-bottom:10px;}
+  .skill-card p{font-size:13.5px; color:var(--ink-soft); line-height:1.75;}
+  @media (max-width:760px){ .skill-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:500px){ .skill-grid{grid-template-columns:1fr;} }
+
+  /* EDUCATION / CERTS */
+  .creds-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:32px;}
+  .edu-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px; margin-bottom:14px;}
+  .edu-degree{font-family:var(--display); font-weight:700; font-size:15px; color:var(--ink);}
+  .edu-school{font-size:13.5px; color:var(--blue); font-weight:600; margin-top:3px;}
+  .edu-years{font-size:12.5px; color:var(--muted); margin-top:3px;}
+  .pub-card{background:var(--blue-tint); border:1px solid #D7E0FB; border-radius:10px; padding:18px 20px; font-size:13.5px; color:var(--ink-soft);}
+  .pub-card .pub-label{font-size:11px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .cert-group{margin-bottom:18px;}
+  .cert-group h4{font-size:12.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:9px;}
+  .cert-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .cert-tags span{font-size:12.5px; background:#fff; border:1px solid var(--line); padding:6px 12px; border-radius:20px; color:var(--ink-soft);}
+  @media (max-width:800px){ .creds-grid{grid-template-columns:1fr;} }
+
+  /* CONTACT */
+  .contact-band{background:var(--ink); border-radius:14px; padding:56px 48px; text-align:center; color:#fff;}
+  .contact-band h2{color:#fff; font-size:26px;}
+  .contact-band p{color:#B9C2D6; margin-top:10px; font-size:15px;}
+  .contact-actions{display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:28px;}
+  .contact-actions a{font-size:14px; font-weight:600; padding:12px 22px; border-radius:6px;}
+  .contact-actions .btn-primary{background:var(--blue);}
+  .contact-actions .btn-outline{background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.25);}
+  .contact-actions .btn-outline:hover{border-color:#fff; color:#fff;}
+  @media (max-width:600px){ .contact-band{padding:40px 24px;} }
+
+  footer{padding:28px 0; text-align:center; font-size:13px; color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">Abhay Singh</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="mailto:AbhaySingh87648@gmail.com">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-card">
+      <div class="hero-grid">
+        <div class="avatar">AS</div>
+        <div>
+          <div class="eyebrow">Available for opportunities</div>
+          <h1 class="name">Abhay Singh</h1>
+          <div class="hero-niche">Full-Stack Developer · Accessible &amp; Voice-First Web Applications</div>
+          <p class="hero-role">Close to a year of experience shipping responsive applications with React.js, Node.js and Angular — API integration, SQL Server, and AI-powered accessibility built in from the start.</p>
+          <div class="hero-meta">
+            <span>📍 Delhi, India</span>
+            <span>✉ AbhaySingh87648@gmail.com</span>
+            <span>📞 +91 976 118 2861</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:AbhaySingh87648@gmail.com">Email me</a>
+            <a class="btn btn-outline" href="https://linkedin.com/in/abhay-singh-21037a230" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-outline" href="https://github.com/ABHAY226507" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-spacer"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap summary">
+    <div class="section-head">
+      <div><span class="section-label">Profile</span><h2>Summary</h2></div>
+    </div>
+    <p>Dedicated Software Developer with hands-on experience across a three-month internship and a six-month traineeship, building modern, responsive applications with React.js, Node.js, Angular and full-stack web technologies. Skilled in API development and integration, SQL Server, and application troubleshooting — with a growing focus on machine learning, NLP and accessible design.</p>
+    <div class="stat-row">
+      <div class="stat-card"><div class="num">~1 yr</div><div class="label">Professional experience</div></div>
+      <div class="stat-card"><div class="num">4</div><div class="label">Companies &amp; internships</div></div>
+      <div class="stat-card"><div class="num">MCA</div><div class="label">Computer Applications, 2024</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="section-label">Career</span><h2>Experience</h2></div>
+      <span class="section-sub">4 roles since 2023</span>
+    </div>
+
+    <div class="job-card">
+      <div class="job-top">
+        <div><div class="job-title">Trainee Developer</div><div class="job-company">BlueKaktus</div></div>
+        <div class="job-dates">Nov 2025 — May 2026</div>
+      </div>
+      <ul>
+        <li>Contributed to end-to-end application workflow across web and mobile platforms.</li>
+        <li>Developed and maintained web applications using React.js and Angular 9, building responsive UI.</li>
+        <li>Performed API development and third-party integration connecting front-end with back-end services.</li>
+        <li>Wrote stored procedures, functions and complex queries in SQL Server for data management.</li>
+        <li>Handled application troubleshooting, identifying root causes and applying timely fixes.</li>
+      </ul>
+    </div>
+
+    <div class="job-card">
+      <div class="job-top">
+        <div><div class="job-title">Software Development Intern</div><div class="job-company">BlueKaktus</div></div>
+        <div class="job-dates">Jul 2025 — Oct 2025</div>
+      </div>
+      <ul>
+        <li>Gained hands-on experience in web application development using React.js, Angular 9 and Node.js.</li>
+        <li>Contributed to feature development under senior developer guidance.</li>
+        <li>Got initial exposure to API integration and SQL-based data operations.</li>
+      </ul>
+    </div>
+
+    <div class="job-card">
+      <div class="job-top">
+        <div><div class="job-title">Web Development Intern</div><div class="job-company">Invelligen, Bengaluru</div></div>
+        <div class="job-dates">Jul 2024 — Nov 2024</div>
+      </div>
+      <ul>
+        <li>Handled testing, website development and maintenance for optimal performance and UX.</li>
+        <li>Evaluated Salesforce CPQ vs Oracle CPQ and prepared feature comparison reports.</li>
+        <li>Contributed as a content creator, writing blog posts aligned with engagement strategy.</li>
+        <li>Supported an internal CPQ evaluation project with insights for decision-making.</li>
+      </ul>
+    </div>
+
+    <div class="job-card">
+      <div class="job-top">
+        <div><div class="job-title">Full Stack Developer Intern</div><div class="job-company">Amiti Software Technologies</div></div>
+        <div class="job-dates">Dec 2023 — Feb 2024</div>
+      </div>
+      <ul>
+        <li>Designed and implemented user interfaces using ReactJS for a modern, visually appealing product.</li>
+        <li>Used Next.js for server-side rendering, improving performance and search visibility.</li>
+        <li>Contributed to back-end functionality with Node.js as part of overall software architecture.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="section-label">Portfolio</span><h2>Projects</h2></div>
+    </div>
+    <div class="project-grid">
+
+      <div class="project-card featured">
+        <span class="project-badge">Featured</span>
+        <div class="project-title">AI Chat Application for Visually Impaired Users</div>
+        <p style="font-size:14px; color:var(--ink-soft); margin-bottom:14px;">A voice-first chat app that lets visually impaired users complete daily tasks hands-free, screen-reader compatible end to end.</p>
+        <ul>
+          <li>Built a voice-first AI chat app to assist visually impaired users with daily tasks and information retrieval.</li>
+          <li>Integrated Text-to-Speech and Speech-to-Text for fully hands-free, screen-reader-compatible interaction.</li>
+          <li>Used Generative AI and NLP to deliver context-aware, accessibility-optimized responses.</li>
+          <li>Implemented WCAG 2.1 standards: keyboard navigation, ARIA labels and high-contrast UI support.</li>
+        </ul>
+        <div class="stack"><span class="chip">React.js</span><span class="chip">Node.js</span><span class="chip">TTS/STT</span><span class="chip">WCAG 2.1</span><span class="chip">Claude / OpenAI API</span></div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">Machine Learning</span>
+        <div class="project-title">Stock Market Sentiment Analysis &amp; Prediction</div>
+        <p style="font-size:14px; color:var(--ink-soft); margin-bottom:14px;">An NLP + regression pipeline that reads market sentiment from news and social media to forecast price movement.</p>
+        <ul>
+          <li>Applied NLP and regression models in Python to forecast stock price movement from large datasets.</li>
+          <li>Analyzed social media and news sentiment to identify market trends.</li>
+          <li>Delivered actionable insights for investors based on sentiment data.</li>
+        </ul>
+        <div class="stack"><span class="chip">Python</span><span class="chip">NLP</span><span class="chip">Regression</span></div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">Data Structures</span>
+        <div class="project-title">Phone Directory Using Doubly Linked List</div>
+        <ul>
+          <li>Built a phone directory system supporting add, edit, delete and search operations.</li>
+          <li>Implemented dynamic memory allocation and deallocation to optimize performance.</li>
+        </ul>
+        <div class="stack"><span class="chip">Data Structures</span><span class="chip">Memory Management</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="section-label">Toolbox</span><h2>Skills</h2></div>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card"><h3>Languages</h3><p>JavaScript, Python, SQL</p></div>
+      <div class="skill-card"><h3>Web Development</h3><p>HTML, CSS, React.js, Angular 9, Node.js, Next.js</p></div>
+      <div class="skill-card"><h3>Backend &amp; Database</h3><p>API Development &amp; Integration, SQL Server (Stored Procedures, Functions, Queries)</p></div>
+      <div class="skill-card"><h3>Machine Learning &amp; AI</h3><p>Machine Learning, NLP, Generative AI, Prompt Engineering, Data Science</p></div>
+      <div class="skill-card"><h3>Accessibility &amp; Voice</h3><p>Text-to-Speech, Speech-to-Text, Web Speech API, WCAG 2.1, ARIA Labels, Screen Reader Compatibility</p></div>
+      <div class="skill-card"><h3>Data &amp; Other</h3><p>Pandas, NumPy, Power BI (basics), Android, Program Management, Content Creation, CPQ Tools</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="section-label">Background</span><h2>Education &amp; Certifications</h2></div>
+    </div>
+    <div class="creds-grid">
+      <div>
+        <div class="edu-card">
+          <div class="edu-degree">Master of Computer Application (MCA)</div>
+          <div class="edu-school">CMR University, Bangalore</div>
+          <div class="edu-years">2022 — 2024</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Computer Application (BCA)</div>
+          <div class="edu-school">Shobhit University, Uttar Pradesh</div>
+          <div class="edu-years">2019 — 2022</div>
+        </div>
+        <div class="pub-card">
+          <span class="pub-label">Publication</span>
+          IJARIIE — "Eco-Innovations in Agriculture: Sustaining Global Food Security and Environmental Harmony" (Paper ID: 24943)
+        </div>
+      </div>
+      <div>
+        <div class="cert-group">
+          <h4>Python &amp; Programming</h4>
+          <div class="cert-tags"><span>Basics of Python — Open Weaver</span><span>Python 3 with Turtle — EC-Council</span><span>Java Fundamentals — Scaler</span><span>Java Data Structures — Great Learning</span></div>
+        </div>
+        <div class="cert-group">
+          <h4>Machine Learning &amp; Data Science</h4>
+          <div class="cert-tags"><span>Data Science Foundations — Great Learning</span><span>AI Fundamentals — IBM</span><span>AWS Image Processing — Great Learning</span><span>SQL for Data Science — Great Learning</span><span>Data Science with GenAI — PW Skills</span></div>
+        </div>
+        <div class="cert-group">
+          <h4>Web Development</h4>
+          <div class="cert-tags"><span>HTML Beginner to Advanced — Udemy</span><span>JavaScript Mastery — Udemy</span><span>Spring Boot — Scaler</span></div>
+        </div>
+        <div class="cert-group">
+          <h4>Project, Quality &amp; Marketing</h4>
+          <div class="cert-tags"><span>Project Management Diploma — Udemy</span><span>Quality Management — Great Learning</span><span>SEO for Beginners — Great Learning</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="contact-band">
+      <h2>Let's work together</h2>
+      <p>Open to full-stack and front-end developer roles. Feel free to reach out.</p>
+      <div class="contact-actions">
+        <a class="btn-primary" href="mailto:AbhaySingh87648@gmail.com">Email me</a>
+        <a class="btn-outline" href="https://linkedin.com/in/abhay-singh-21037a230" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn-outline" href="https://github.com/ABHAY226507" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Abhay Singh · Delhi, India</footer>
+
+</body>
+</html>
