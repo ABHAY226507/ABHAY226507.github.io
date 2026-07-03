@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Please forgive me 🥺</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#FF7AA2;
+    --pink-dark:#E85D8A;
+    --yellow:#FFD972;
+    --purple:#B08CFF;
+    --ink:#3A2E4D;
+    --cream:#FFF6EE;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html, body{height:100%;}
+  body{
+    font-family:'Quicksand', sans-serif;
+    background:linear-gradient(135deg, #FFE8D6 0%, #FFD6E8 50%, #E4D6FF 100%);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px; overflow:hidden;
+  }
+  .card{
+    background:var(--cream);
+    border-radius:24px;
+    max-width:460px; width:100%;
+    min-height:420px;
+    padding:48px 40px;
+    text-align:center;
+    box-shadow:0 30px 70px -20px rgba(180,120,150,0.35), 0 2px 8px rgba(180,120,150,0.08);
+    border:1px solid rgba(255,255,255,0.6);
+    position:relative;
+    overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .card::before{
+    content:""; position:absolute; top:-60px; left:-60px; width:180px; height:180px;
+    background:radial-gradient(circle, rgba(255,122,162,0.18), transparent 70%);
+    border-radius:50%;
+  }
+  .card::after{
+    content:""; position:absolute; bottom:-60px; right:-60px; width:180px; height:180px;
+    background:radial-gradient(circle, rgba(255,217,114,0.25), transparent 70%);
+    border-radius:50%;
+  }
+
+  .face{
+    font-size:72px;
+    display:inline-block;
+    transition:transform 0.3s ease;
+    position:relative; z-index:1;
+  }
+  h1{
+    font-family:'Fredoka', sans-serif;
+    font-size:28px; font-weight:600; color:var(--pink-dark);
+    margin:18px 0 10px; letter-spacing:-0.01em;
+    position:relative; z-index:1;
+  }
+  .caption{
+    color:var(--ink); opacity:0.7; font-size:15px; line-height:1.5; margin-bottom:36px;
+    position:relative; z-index:1; min-height:22px; transition:opacity 0.2s ease;
+    max-width:340px;
+  }
+
+  .btn-row{
+    position:relative; z-index:1;
+    display:flex; gap:16px; justify-content:center; align-items:center;
+    width:100%; min-height:60px;
+  }
+  .btn{
+    font-family:'Fredoka', sans-serif;
+    font-size:16px; font-weight:600;
+    border:none; padding:14px 26px; border-radius:100px;
+    cursor:pointer; transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-yes{
+    color:#fff;
+    background:linear-gradient(135deg, var(--pink), var(--pink-dark));
+    box-shadow:0 10px 24px rgba(232,93,138,0.35);
+  }
+  .btn-yes:hover{ transform:translateY(-2px) scale(1.04); }
+  .btn-no{
+    color:var(--ink); background:#fff; opacity:0.85;
+    box-shadow:0 6px 16px rgba(180,120,150,0.15);
+    position:relative;
+  }
+
+  /* runaway state for the No button */
+  .btn-no.dodging{
+    position:fixed;
+    transition:top 0.35s cubic-bezier(.34,1.56,.64,1), left 0.35s cubic-bezier(.34,1.56,.64,1);
+    z-index:50;
+  }
+
+  .btn-whatsapp{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Fredoka', sans-serif; font-size:15.5px; font-weight:600;
+    color:#fff; background:#25D366; text-decoration:none;
+    padding:13px 26px; border-radius:100px; margin-top:22px;
+    box-shadow:0 10px 24px rgba(37,211,102,0.32);
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+    position:relative; z-index:1;
+  }
+  .btn-whatsapp:hover{ transform:translateY(-2px) scale(1.03); box-shadow:0 14px 30px rgba(37,211,102,0.4); }
+
+  .stage{ display:none; position:relative; z-index:1; }
+  .stage.active{ display:block; }
+
+  #final .face{ animation:pop 0.6s ease; font-size:64px; }
+  @keyframes pop{
+    0%{ transform:scale(0.4) rotate(-10deg); opacity:0; }
+    70%{ transform:scale(1.15) rotate(4deg); }
+    100%{ transform:scale(1) rotate(0); opacity:1; }
+  }
+  #final h1{ margin-top:14px; }
+  #final p{ color:var(--ink); opacity:0.85; font-size:15.5px; line-height:1.7; margin-top:6px; max-width:360px; position:relative; z-index:1; }
+
+  .confetti{
+    position:fixed; top:-20px; z-index:0; pointer-events:none;
+    border-radius:2px; opacity:0.9;
+  }
+  @keyframes fall{
+    to{ transform:translateY(110vh) rotate(360deg); opacity:0.3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="stage active" id="ask">
+    <div class="face" id="face">🥺</div>
+    <h1>Sakshi, mujhe maaf karoge na?</h1>
+    <div class="caption" id="caption">Pata hai hum dono ladte bahut hain, but please ek chance de do</div>
+    <div class="btn-row">
+      <button class="btn btn-yes" onclick="forgive()">Haan, maaf kar diya 💛</button>
+      <button class="btn btn-no" id="noBtn">Nahi 😤</button>
+    </div>
+  </div>
+
+  <div class="stage" id="final">
+    <div class="face">🥹💛</div>
+    <h1>Yayy!! Thank you Sakshi</h1>
+    <p>Pata hai hum dono ke beech ladai hoti rehti hai, but tum meri sabse important dost ho aur main nahi chahta ki isse hamari friendship pe asar pade.</p>
+    <a class="btn btn-whatsapp" href="https://wa.me/919761182861?text=Maine%20maaf%20kar%20diya%20%F0%9F%92%9B%20ab%20hum%20baat%20karenge!" target="_blank" rel="noopener">Message me on WhatsApp</a>
+  </div>
+
+</div>
+
+<script>
+var captions = [
+  "Ek chance de do please 🥺",
+  "Dekho na kitna innocent lag raha hoon",
+  "Achaa extra sorry 🙏",
+  "Please please please",
+  "Main serious mein sorry hoon yaar",
+  "Sirf ek 'haan' bacha hai bas",
+  "No wala button thak gaya bhaag bhaag ke 😅"
+];
+var faces = ["🥺","😢","🙏","😔","🥹","😭","🫠"];
+var clicks = 0;
+
+var noBtn = document.getElementById('noBtn');
+var faceEl = document.getElementById('face');
+var captionEl = document.getElementById('caption');
+
+function dodge(){
+  clicks++;
+  var idx = Math.min(clicks - 1, captions.length - 1);
+  captionEl.style.opacity = 0;
+  setTimeout(function(){
+    captionEl.textContent = captions[idx];
+    faceEl.textContent = faces[Math.min(clicks - 1, faces.length - 1)];
+    captionEl.style.opacity = 1;
+  }, 150);
+
+  noBtn.classList.add('dodging');
+  var margin = 60;
+  var maxW = window.innerWidth - margin * 2;
+  var maxH = window.innerHeight - margin * 2;
+  var newLeft = margin + Math.random() * maxW;
+  var newTop = margin + Math.random() * maxH;
+  noBtn.style.left = newLeft + 'px';
+  noBtn.style.top = newTop + 'px';
+
+  // shrink it a little more each time, min size so it stays tappable-ish but silly
+  var scale = Math.max(0.55, 1 - clicks * 0.06);
+  noBtn.style.transform = 'scale(' + scale + ')';
+}
+
+noBtn.addEventListener('mouseenter', dodge);
+noBtn.addEventListener('click', function(e){ e.preventDefault(); dodge(); });
+noBtn.addEventListener('touchstart', function(e){ e.preventDefault(); dodge(); }, {passive:false});
+
+function forgive(){
+  document.getElementById('ask').classList.remove('active');
+  document.getElementById('final').classList.add('active');
+  burst();
+  notify();
+}
+
+function notify(){
+  try{
+    fetch("https://ntfy.sh/abhay226507-portfolio-x7k29m", {
+      method: "POST",
+      body: "Sakshi just clicked 'Haan, maaf kar diya' 💛\n" + new Date().toLocaleString(),
+      headers: { "Title": "Sakshi ne maaf kar diya! 🎉" }
+    }).catch(function(){});
+  }catch(e){}
+}
+
+function burst(){
+  var colors = ['#FF7AA2','#FFD972','#B08CFF','#FFB88C'];
+  for(var i=0;i<50;i++){
+    var el = document.createElement('div');
+    el.className = 'confetti';
+    var size = 6 + Math.random()*6;
+    el.style.width = size+'px';
+    el.style.height = size+'px';
+    el.style.left = Math.random()*100+'vw';
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.animation = 'fall ' + (2.5 + Math.random()*2) + 's ease-in forwards';
+    el.style.animationDelay = (Math.random()*0.4)+'s';
+    document.body.appendChild(el);
+    (function(node){ setTimeout(function(){ node.remove(); }, 5500); })(el);
+  }
+}
+</script>
+
+</body>
+</html>
